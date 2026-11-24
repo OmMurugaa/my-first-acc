@@ -1,0 +1,6 @@
+{
+  "name": "MyFirst Account App",
+  "description": "Offline-first, AES-256-GCM encrypted personal finance management app with IndexedDB storage, reports, PDF import, and PWA support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

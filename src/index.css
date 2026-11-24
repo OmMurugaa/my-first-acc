@@ -1,0 +1,267 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Default: Dark Mode */
+  --bg-canvas: #0A0E17;
+  --bg-surface: #121824;
+  --bg-surface-elevated: #171F2E;
+  --bg-input: #0D121D;
+  --border-subtle: #222C40;
+  --border-strong: #32405B;
+  --text-primary: #F1F5F9;
+  --text-secondary: #CBD5E1;
+  --text-muted: #8B9BB4;
+  --accent-primary: #10B981;
+  --accent-primary-hover: #059669;
+  --accent-soft: rgba(16, 185, 129, 0.12);
+  --income-text: #34D399;
+  --expense-text: #FB7185;
+  --warning-text: #FBBF24;
+}
+
+html.theme-gray {
+  /* Gray Mode — Neutral Cool Ash-Slate surface for glare-free precision */
+  --bg-canvas: #E4E7EC;
+  --bg-surface: #F2F4F7;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-input: #FFFFFF;
+  --border-subtle: #CFD5DE;
+  --border-strong: #9AA4B2;
+  --text-primary: #101828;
+  --text-secondary: #344054;
+  --text-muted: #525E70;
+  --accent-primary: #059669;
+  --accent-primary-hover: #047857;
+  --accent-soft: rgba(5, 150, 105, 0.1);
+  --income-text: #047857;
+  --expense-text: #BE123C;
+  --warning-text: #B45309;
+}
+
+html.theme-dark {
+  --bg-canvas: #0A0E17;
+  --bg-surface: #121824;
+  --bg-surface-elevated: #171F2E;
+  --bg-input: #0D121D;
+  --border-subtle: #222C40;
+  --border-strong: #32405B;
+  --text-primary: #F1F5F9;
+  --text-secondary: #CBD5E1;
+  --text-muted: #8B9BB4;
+  --accent-primary: #10B981;
+  --accent-primary-hover: #059669;
+  --accent-soft: rgba(16, 185, 129, 0.12);
+  --income-text: #34D399;
+  --expense-text: #FB7185;
+  --warning-text: #FBBF24;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html.theme-dark body {
+    letter-spacing: 0.005em;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono-tabular {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom utility tokens mapped to CSS variables */
+.app-canvas {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+}
+
+.app-surface {
+  background-color: var(--bg-surface);
+  border-color: var(--border-subtle);
+}
+
+.app-surface-elevated {
+  background-color: var(--bg-surface-elevated);
+  border-color: var(--border-subtle);
+}
+
+.app-input {
+  background-color: var(--bg-input);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.app-input:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.app-border {
+  border-color: var(--border-subtle);
+}
+
+.app-text-muted {
+  color: var(--text-muted);
+}
+
+.app-text-secondary {
+  color: var(--text-secondary);
+}
+
+/* Subtle micro-animations for navigation, page transitions, modals & interactive cards */
+@keyframes mfaPageEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mfaModalPop {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes mfaSheetUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-mfa-page {
+  animation: mfaPageEnter 160ms ease-out;
+}
+
+.animate-mfa-modal {
+  animation: mfaModalPop 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-mfa-sheet {
+  animation: mfaSheetUp 190ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.app-sticky-header {
+  position: sticky;
+  top: 3.25rem;
+  z-index: 20;
+  background-color: var(--bg-canvas);
+}
+
+.app-sticky-panel {
+  background-color: var(--bg-canvas);
+}
+
+@media (min-width: 768px) {
+  .app-sticky-panel {
+    position: sticky;
+    top: 3.25rem;
+    z-index: 20;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-sticky-header,
+  .app-sticky-panel {
+    top: 0;
+  }
+}
+
+.app-nav-item {
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.app-nav-item:hover {
+  transform: translateX(2px);
+}
+
+.app-nav-item:active {
+  transform: scale(0.99);
+}
+
+.app-card-interactive {
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.app-card-interactive:hover {
+  transform: translateY(-2px);
+}
+
+.app-card-interactive:active {
+  transform: translateY(0) scale(0.995);
+}
+
+/* Safe area padding for mobile PWAs */
+.pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+/* Print Stylesheet for clean financial statements */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .app-sticky-header,
+  .app-sticky-panel {
+    position: static !important;
+  }
+  .app-surface,
+  .app-surface-elevated,
+  .app-canvas {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #d1d5db !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
